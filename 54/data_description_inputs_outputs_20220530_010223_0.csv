@@ -1,0 +1,22 @@
+,tide_cm,wat_temp_c
+Skew,-0.217,-0.845
+Kurtosis,-1.193,-0.393
+Mean,0.83,20.011
+Geometric Mean,,19.976
+Standard error of mean,0.619,0.03
+Median,2.96,20.369
+Variance,553.911,1.343
+Coefficient of Variation,28.352,0.058
+Std,23.535,1.159
+Non Zeros,1446.0,1446.0
+Min,-47.694,17.144
+Max,41.329,21.555
+Sum,1200.358,28935.402
+Counts,1446.0,1446.0
+Shannon entropy,7.276,7.276
+Negative counts,652.0,0.0
+90th percentile,29.637,21.19
+75th percentile,22.352,20.989
+50th percentile,2.96,20.369
+25th percentile,-19.853,19.392
+10th percentile,-34.004,17.938
