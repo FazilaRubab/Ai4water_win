@@ -1,0 +1,173 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <title>User Friendly ML Framework</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
+    <link rel="stylesheet" href="{% static '/css/demo.css' %}">
+
+
+    <style type="text/css">
+        body
+        {
+            background-image: url("{% static 'Images/ai.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main_navbar">
+    <a class="navbar-brand" href="#"><img src="{% static '/Images/logo1.png' %}" class="logo" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Data Collection <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Model">Model <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="EDA">Exploratory Data Analysis <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Post_Processing">Post Processing <span
+                        class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                    <li><a class="dropdown-item" href="Explanation">Explanation </a></li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Experiments">Experiments <span
+                        class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Regression">ML Regression Experiments</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Classification">ML Classification Experiments</a></li>
+                </ul>
+            </li>
+        </ul>
+        </li>
+    </div>
+</nav>
+<div class="container shadow-lg p-5 mb-5 bg-white rounded" style="margin-top: 1.5em; width: 80%;">
+    <form method="post">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Input Features: </label>
+                    <input type="text" id="input" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>output features:</label>
+                    <input type="text" id="output" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Cases:</label>
+                    <input type="text" id="output1" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Experiment Name:</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>No of Samples:</label>
+                    <input type="text" class="form-control" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label>Verbosity:</label>
+                    <input type="text" id="input2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Parameter space:</label>
+                    <input type="text" id="output2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>x_0:</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Model key word arguments:</label>
+                    <input type="text" class="form-control" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Compare errors</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Fit with tpot</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">From config</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Plot convergence</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Plot cv score</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Plot improvements</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Plot losses</button>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary">Taylor plot</button>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+<script>
+        document.getElementById("input").value = localStorage.getItem("selectedInp");
+        document.getElementById("output").value = localStorage.getItem("selectedOp");
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="js/bootnavbar.js"></script>
+<script>
+        $(function () {
+            $('#main_navbar').bootnavbar();
+        })
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80520768-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80520768-2');
+  </script>
+</body>
+
+</html>

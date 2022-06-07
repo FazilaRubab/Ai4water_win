@@ -1,0 +1,717 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <title>User Friendly ML Framework</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
+    <link rel="stylesheet" href="{% static '/css/bootnavbar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/demo.css' %}">
+    <style type="text/css">
+        body
+        {
+            background-image: url("{% static 'Images/ai.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+
+
+
+
+    </style>
+
+</head>
+<!--<script type="text/javascript">-->
+<!--var inputColumns = {{ data.inputColumns|safe }};-->
+<!--console.log(inputColumns)-->
+
+<!--var inputFeatures = {{ data.inputFeatures|safe }};-->
+<!--var outputFeatures = {{ data.outputFeatures|safe }};-->
+<!--console.log(inputFeatures)-->
+<!--</script>-->
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main_navbar">
+    <a class="navbar-brand" href="/"><img src="{% static '/Images/logo1.png' %}" class="logo"/></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Data Collection <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Model">Model <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="EDA">Exploratory Data Analysis <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Post_Processing">Post Processing
+                    <span class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                    <li><a class="dropdown-item" href="Explanation">Explanation </a></li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Experiments">Experiments <span
+                        class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Regression">ML Regression Experiments</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Classification">ML Classification Experiments</a></li>
+                </ul>
+            </li>
+        </ul>
+        </li>
+    </div>
+</nav>
+  <div id="msgDiv"  style="background-color: #D3D3D3; border-radius: 20px;margin-bottom: 10px; margin-top: 15px;" st class="container box">
+ <center><h3 id="msg"></h3></center>
+ </div>
+<div class="container shadow-lg p-5 mb-5 bg-white rounded" style="margin-top: 1.5em; width: 80%;">
+
+    <form method="post" action="processing" id="model-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+
+                <div class="form-group">
+                    <label>Input Features:</label>
+                    <input name="inputFeatures" id="inputFeatures" type="text" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label>output features:</label>
+                    <input name="outputFeatures" id="outputFeatures" type="text" class="form-control" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Train Fraction:</label>
+                    <input name="trainFraction" id="trainFraction" type="text" value= "0.7" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Value Fraction:</label>
+                    <input name="valueFraction" id="valueFraction" type="text" value= "0.3" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Allow nan variables:</label>
+                    <input name="allowNan" id="allowNan" type="text" value= "None" class="form-control" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Patience:</label>
+                    <input name="patience" id="patience" type="text" value= "100" class="form-control" required>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+                        <div class="col">
+
+                <div class="form-group">
+                    <label>Batch Size:</label>
+                    <input name="batchSize" id="batchSize" type="text" value= "2d" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Drop remainder:</label>
+                    <input name="dropRemainder" id="dropRemainder" type="text" value= "0" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Teacher forcing:</label>
+                    <input name="teacherForcing" id="teacherForcing" type="text" value= "False" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Allow input Nans:</label>
+                    <input name="allowInputNan" id="allowInputNan" type="text" value= "None" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Seed:</label>
+                    <input name="seed" id="seed" type="text" value= "313" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Monitor:</label>
+                    <input name="monitor" id="monitor" type="text" value= "None" class="form-control" required>
+                </div>
+
+            </div>
+
+
+
+
+
+                        <div class="col">
+
+                <div class="form-group">
+                    <label>Verbosity:</label>
+                    <input name="verbosity" id="verbosity" type="text" value= "1" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <input list="model" id="model" >
+
+                    <select class="form-control" required>
+                        <option value="ADA Boost Regressor"></option>>
+                        <option value="ARD Regressor"></option>>
+                        <option value="Bagging Regressor"></option>>
+                        <option>Bayesian Ridge</option>>
+                        <option>CAT Boost Regressor</option>>
+                        <option>Decision Tree Regressor</option>>
+                        <option>Dummy Regressor</option>>
+                        <option>Elastic Net</option>>
+                        <option>Elastic Net CV</option>>
+                        <option>Extra Trees Regressor</option>>
+                        <option>Gaussian Process Regressor</option>>
+                        <option>Gradient Boosting Regressor</option>>
+                        <option>Hist Gradient Boosting Regressor</option>>
+                        <option>Huber Regressor</option>>
+                        <option>Kernel Ridge</option>>
+                        <option>K Neighbors Regressor</option>>
+                        <option>Lars</option>
+                        <option>Lars CV</option>>
+                        <option>Lasso"</option>
+                        <option>Lasso Lars</option>>
+                        <option>Lasso Lars CV</option>>
+                        <option>Lasso Lars IC</option>>
+                        <option>LGBM Regressor</option>>
+                        <option>Linear Regression</option>>
+                        <option>Linear SVR</option>>
+                        <option>MLP Regressor</option>>
+                        <option>NuSVR"</option>
+                        <option>One Class SVM</option>>
+                        <option>Orthogonal Matching Pursuit</option>>
+                        <option>Orthogonal Matching Pursuit CV</option>>
+                        <option>Poisson Regressor</option>>
+                        <option>Radius Neighbors Regressor</option>
+                        <option>Random Forest Regressor</option>>
+                        <option>RANSAC Regressor</option>>
+                        <option>Ridge</option>
+                        <option>Ridge CV</option>>
+                        <option>SGD Regressor</option>>
+                        <option>SVR</option>
+                        <option>Theilsen Regressor</option>>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>X Transformation:</label>
+                     <select name="xTransformation" id="xTransformation" class="form-control" required>
+                        <option>minmax</option>
+                         <option>maxabs</option>
+                         <option>robust</option>
+                         <option>power same as yeo-johnson</option>
+                         <option>yeo-johnson</option>
+                         <option>box-cox</option>>
+                         <option>zscore</option>>
+                         <option>scale division</option>
+                        <option>center</option>
+                         <option>quantile</option>>
+                         <option>log natural logrithmic</option>>
+                         <option>log10 log with base 10</option>>
+                         <option>log2 log with base 2</option>>
+                         <option>sqrt square root</option>>
+                         <option>tan tangent</option>>
+                         <option>cumsum cummulative sum</option>>
+                        
+                      </select>
+                </div>
+                <div class="form-group">
+                    <label>Y Transformation:</label>
+                    <select >
+                        <option>minmax</option>
+                         <option>maxabs</option>
+                         <option>robust</option>
+                         <option>power same as yeo-johnson</option>
+                         <option>yeo-johnson</option>
+                         <option>box-cox</option>>
+                         <option>zscore</option>>
+                         <option>scale division</option>
+                        <option>center</option>
+                         <option>quantile</option>>
+                         <option>log natural logrithmic</option>>
+                         <option>log10 log with base 10</option>>
+                         <option>log2 log with base 2</option>>
+                         <option>sqrt square root</option>>
+                         <option>tan tangent</option>>
+                         <option>cumsum cummulative sum</option>>
+
+                      </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Learning Rate:</label>
+                    <input name="learningRate" id="learningRate" type="text" value= "0.001" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Value metrics:</label>
+                    <input name="valueMetrics" id="valueMetrics" type="text" value= "None" class="form-control" required>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="col">
+
+                <div class="form-group">
+                    <label>Optimizer:</label>
+                    <input name="optimizer" id="optimizer" type="text" value= "Adam" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Loss:</label>
+                    <input name="loss" id="loss" type="text" value= "mse" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantiles:</label>
+                    <input name="quantiles" id="quantiles" type="text" value= "None" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Epochs:</label>
+                    <input name="epochs" id="epochs" type="text" value= "None" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Minimum value loss:</label>
+                    <input name="minimumValueLoss" id="minimumValueLoss" type="text" value= "0.0001" class="form-control" required>
+                </div>
+
+                    <div class="form-group">
+                    <label>Prefix:</label>
+                    <input name="prefix" id="prefix" type="text" value= "None" class="form-control" required>
+                </div>
+
+            </div>
+
+<!--                <div class="form-group">-->
+<!--                    <label>Seed:</label>-->
+<!--                    <input name="seed" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Teacher Forcing:</label>-->
+<!--                    <input name="teacherForcing" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Intervals:</label>-->
+<!--                    <input name="intervals" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Lookback:</label>-->
+<!--                    <input name="lookback" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Input Step:</label>-->
+<!--                    <input name="inputStep" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Shuffle:</label>-->
+<!--                    <input name="shuffle" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Allow Nan lables:</label>-->
+<!--                    <input name="allowNanLables" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Nan Filler:</label>-->
+<!--                    <input name="nanfiller" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Batch Size:</label>-->
+<!--                    <input name="batchSize" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Drop Remainder:</label>-->
+<!--                    <input name="dropRemainder" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Forecast Length:</label>-->
+<!--                    <input name="forecastLength" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Forecast Step:</label>-->
+<!--                    <input name="forecastStep" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Known Feature Inputs:</label>-->
+<!--                    <input name="knownFeatures" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Allow Input Nans:</label>-->
+<!--                    <input name="allowInputNans" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Train Data:</label>-->
+<!--                    <input name="trainData" type="text" class="form-control" required>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Input Features:</label>-->
+<!--                    <input name="inputFeatures" id="input" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>output features:</label>-->
+<!--                    <input name="outputFeatures" id="output" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Dataset Arguments:</label>-->
+<!--                    <input name="datasetArguments" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Value Fraction:</label>-->
+<!--                    <input name="valueFraction" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Test Fraction:</label>-->
+<!--                    <input name="testFraction" type="text" type="text" class="form-control" required>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Model:</label>-->
+<!--                    <input name="model" type="text"  class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Learning Rate:</label>-->
+<!--                    <input name="learningRate" type="text"  class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Optimizer:</label>-->
+<!--                    <input name="optimizer" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Loss:</label>-->
+<!--                    <input name="loss" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Quantiles:</label>-->
+<!--                    <input name="quantiles" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Epochs:</label>-->
+<!--                    <input name="epochs" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Minimum Value Loss:</label>-->
+<!--                    <input name="minValueLoss" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Patience:</label>-->
+<!--                    <input name="patience" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Subsequences :</label>-->
+<!--                    <input name="subsequences" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Metrics:</label>-->
+<!--                    <input name="metrics" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Value Metrics:</label>-->
+<!--                    <input name="valueMetrics" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Cross Validaor:</label>-->
+<!--                    <input name="crossValidator" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Batches:</label>-->
+<!--                    <input name="batches" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Wandb Config:</label>-->
+<!--                    <input name="wandbConfig" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Prefix:</label>-->
+<!--                    <input name="prefix" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Path:</label>-->
+<!--                    <input name="path" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Verbosity:</label>-->
+<!--                    <input name="verbosity" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col">-->
+<!--                <div class="form-group">-->
+<!--                    <label>Accept Additional Arguments:</label>-->
+<!--                    <input name="additionalArguments" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Keyword Arguments:</label>-->
+<!--                    <input name="keywordArguments" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>X Transormation:</label>-->
+<!--                    <input name="xTransormation" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Y Transformation:</label>-->
+<!--                    <input name="yTransformation" type="text" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label>Monitor:</label>-->
+<!--                    <input name="monitor" type="text" class="form-control" required>-->
+<!--                </div>-->
+
+<!--            </div>-->
+        </div>
+<!--        <input type="hidden" id="inputFeatures" name="inputFeatures">-->
+<!--        <input type="hidden" id="outputFeatures" name="outputFeatures">-->
+        <input type="hidden" id="csvFile" name="csvFile">
+        <input type="hidden" id="type" name="type" value="fit">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <button type="button" onclick="change('Optimize Transformations')" name="type" value="Optimize Transformations" class="form-control btn btn-primary">
+                    Optimize Transformations
+                </button>
+                <div class="col-md-1"></div>
+                <button type="button" onclick="change('Optimize Hyper Parameters')" name="type" value="Optimize Hyper Parameters" class="form-control btn btn-primary">
+                    Optimize Hyper Parameters
+                </button>
+
+
+
+                <div class="col-md-8"></div>
+                <button type="button" onclick="change('Cross value Score')" name="type" value="Cross value Score" class="form-control btn btn-primary ">Cross
+                    value Score
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <button type="button" onclick="change('fit')" name="type" value="fit" class="form-control btn btn-primary">Fit</button>
+                <div class="col-md-4"></div>
+                <button type="button" onclick="change('evaluate')" name="type" value="evaluate" class="form-control btn btn-primary">Evaluate
+                </button>
+                <div class="col-md-8"></div>
+                <button type="button" onclick="change('predict')" name="type" value="predict" class="form-control btn btn-primary">Predict</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Optimized Transformation Result</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <table id="table" class="table table-striped table-responsive">
+  </table>
+  </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+        document.getElementById("input").value = localStorage.getItem("selectedInp");
+        document.getElementById("output").value = localStorage.getItem("selectedOp");
+
+
+
+
+
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="{%static 'js/bootnavbar.js' %}"></script>
+<script>
+        $(function () {
+            $('#main_navbar').bootnavbar();
+        })
+
+
+
+
+
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80520768-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80520768-2');
+
+
+
+
+
+</script>
+<script type="text/javascript">
+
+document.getElementById("csvFile").value = localStorage.getItem("inputFile");
+
+var inputFeatures = localStorage.getItem("selectedInp");
+var outputFeatures = localStorage.getItem("selectedOp");
+
+document.getElementById("inputFeatures").value = inputFeatures;
+document.getElementById("outputFeatures").value = outputFeatures;
+
+
+function change(value){
+console.log("Value", value)
+          document.getElementById("type").value = value;
+          if(validateForm())
+          {
+          $("#model-form").submit();
+          }
+          else{
+          alert("All fields are required");
+          }
+
+          }
+
+$('#model-form').on('submit', function(event){
+    event.preventDefault();
+    console.log("form submitted!")  // sanity check
+    create_post();
+});
+
+// AJAX for posting
+function create_post() {
+    console.log("create post is working!") // sanity check
+
+    var form = $(this);
+var formData = $("#model-form").serialize();
+
+
+
+    $.ajax({
+        url : "processing", // the endpoint
+        type : "POST", // http method
+        data : formData,
+
+        // handle a successful response
+        success : function(json) {
+        console.log("Success")
+            $('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+           $('#msg').text(json.msg)
+           $('#msgDiv').show()
+
+           if(json.showData)
+           {
+           $('#myModal').modal('show');
+           ConvertToTable(JSON.parse(json.dataToShow))
+           }
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log("Error", err,errmsg)
+<!--            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console-->
+        }
+    });
+};
+
+function ConvertToTable(jData) {
+  var arrJSON = typeof jData != 'object' ? JSON.parse(jData) : jData;
+  var $table = $('<table/>');
+  var $headerTr = $('<tr/>');
+
+  for (var index in arrJSON[0]) {
+    $headerTr.append($('<th/>').html(index));
+  }
+  $table.append($headerTr);
+  for (var i = 0; i < arrJSON.length; i++) {
+   var $tableTr = $('<tr/>');
+    for (var index in arrJSON[i]) {
+      $tableTr.append($('<td/>').html(arrJSON[i][index]));
+    }
+    $table.append($tableTr);
+  }
+  $('#table').append($table);
+}
+
+
+function validateForm() {
+    var valid = true;
+    $('input').each(function () {
+    console.log($(this).val())
+        if ($(this).val() === '') {
+            valid = false;
+            return false;
+        }
+    });
+    return valid
+}
+
+</script>
+</body>
+
+</html>

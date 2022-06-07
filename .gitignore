@@ -2,3 +2,7 @@ venv
 .idea/
 
 *.png
+
+# private stuff
+results/
+data/

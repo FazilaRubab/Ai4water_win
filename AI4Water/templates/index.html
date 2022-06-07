@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load static %}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/bootnavbar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/demo.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body
+        {
+            background-image: url("{% static 'Images/index.png' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial;
+            font-color: white;
+            font-size: 12pt;
+            padding: 0.5em;
+        }
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main_navbar">
+    <a class="navbar-brand" href="">
+        <img src="{% static '/Images/logo1.png' %}" class="logo" alt="logo"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="">Data Collection <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Model">Model <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="EDA">Exploratory Data Analysis <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Post_Processing.html">Post Processing
+                    <span class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                    <li><a class="dropdown-item" href="Explanation">Explanation </a></li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Experiments.html">Experiments <span
+                        class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Regression">ML Regression Experiments</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Classification">ML Classification Experiments</a></li>
+                </ul>
+            </li>
+        </ul>
+        </li>
+    </div>
+</nav>
+<script type="text/javascript">
+        function UploadInput() {
+            var fileUpload = document.getElementById("fileUpload");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test(fileUpload.value.toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var table = document.createElement("table");
+                        var rows = e.target.result.split("\n");
+                        for (var i = 0; i < 1; i++) {
+                            var cells = rows[i].split(",");
+                            if (cells.length > 1) {
+                                var row = table.insertRow(-1);
+                                for (var j = 0; j < cells.length; j++) {
+                                    var x = document.createElement("INPUT");
+                                    x.setAttribute("type", "checkbox");
+                                    x.setAttribute("value", cells[j]);
+                                    x.setAttribute("name", "input");
+                                    x.setAttribute("id", cells[j]);
+
+                                    var br = document.createElement("BR");
+
+                                    var y = document.createElement("LABEL");
+                                    var t = document.createTextNode(cells[j]);
+                                    y.setAttribute("for", cells[j]);
+                                    y.appendChild(t);
+
+                                    var cell = row.insertCell(-1);
+                                    document.getElementById("dvCSVI").appendChild(x);
+                                    document.getElementById("dvCSVI").appendChild(y);
+                                    document.getElementById("dvCSVI").appendChild(br);
+                                }
+                            }
+                        }
+                    }
+                    reader.readAsText(fileUpload.files[0]);
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            } else {
+                alert("Please upload a valid CSV file.");
+            }
+        }
+        function UploadOutput() {
+            var fileUpload = document.getElementById("fileUpload");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test(fileUpload.value.toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var table = document.createElement("table");
+                        var rows = e.target.result.split("\n");
+                        for (var i = 0; i < 1; i++) {
+                            var cells = rows[i].split(",");
+                            if (cells.length > 1) {
+                                var row = table.insertRow(-1);
+                                for (var j = 0; j < cells.length; j++) {
+                                    var x = document.createElement("INPUT");
+                                    x.setAttribute("type", "checkbox");
+                                    x.setAttribute("value", cells[j]);
+                                    x.setAttribute("name", "output");
+                                    x.setAttribute("id", cells[j]);
+
+                                    var br = document.createElement("BR");
+
+                                    var y = document.createElement("LABEL");
+                                    var t = document.createTextNode(cells[j]);
+                                    y.setAttribute("for", cells[j]);
+                                    y.appendChild(t);
+
+                                    var cell = row.insertCell(-1);
+                                    document.getElementById("dvCSVO").appendChild(x);
+                                    document.getElementById("dvCSVO").appendChild(y);
+                                    document.getElementById("dvCSVO").appendChild(br);
+                                }
+                            }
+                        }
+                    }
+                    reader.readAsText(fileUpload.files[0]);
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            } else {
+                alert("Please upload a valid CSV file.");
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        function GetSelected() {
+            var selectedinps = new Array();
+            var selectedops = new Array();
+
+            var inps = document.querySelectorAll('input[name=input]:checked');
+            var ops = document.querySelectorAll('input[name=output]:checked');
+            var fileInput = document.getElementById("fileUpload");
+
+            console.log(fileInput)
+            var reader = new FileReader();
+            reader.onload = function () {
+            console.log("reader.result: ",reader.result);
+            localStorage.setItem("inputFile", reader.result)
+            };
+            // start reading the file. When it is done, calls the onload event defined above.
+            reader.readAsBinaryString(fileInput.files[0]);
+
+
+            for (var i = 0; i < inps.length; i++) {
+                selectedinps.push(inps[i].value);
+            }
+
+            for (var i = 0; i < ops.length; i++) {
+                selectedops.push(ops[i].value);
+            }
+
+            selectedinps = selectedinps.join(", ");
+            selectedops = selectedops.join(", ");
+
+            localStorage.setItem("selectedInp", selectedinps);
+            localStorage.setItem("selectedOp", selectedops);
+            //localStorage.setItem("tot", tot);
+            document.getElementById("input").value = localStorage.getItem("selectedInp", selectedinps);
+            document.getElementById("output").value = localStorage.getItem("selectedOp", selectedops);
+        };
+    </script>
+<div class="container">
+    <h1>Ai4water </h1><br>
+    <form id="DataCollectionForm" action="/Model" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input type="file" name ="inputFile" id="fileUpload" accept=".csv"/>
+        <input type="button" id="upload" value="Upload" onclick="UploadInput(), UploadOutput()"/>
+        <hr/>
+            <p>Upload csv files only</p>
+        <hr>
+            <div class="row">
+        <div class="col">
+            <div id="dvCSVI">
+                <h3>Input Columns</h3>
+            </div>
+            <input type="text" name="input" id="input" class="form-control" readonly></input>
+        </div>
+        <div class="col">
+            <div id="dvCSVO">
+                <h3>Output Columns</h3>
+            </div>
+            <input type="text" name="output" id="output" class="form-control" readonly></input><br>
+            <button type="button" class="btn btn-primary" onclick="GetSelected()">Submit</button>
+<!--            <a href="javascript:$('DataCollectionForm').submit();" class="btn btn-success" role="button">Proceed</a>-->
+            <input type="submit" class="btn btn-success" value="Proceed">
+
+        </div>
+    </div>
+    </form>
+
+</div>
+</body>
+</html>

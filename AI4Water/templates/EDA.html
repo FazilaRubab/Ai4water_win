@@ -1,0 +1,374 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title>User Friendly ML Framework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static '/css/bootnavbar.css' %}">
+    <link rel="stylesheet" href="{% static '/css/demo.css' %}">
+    <style type="text/css">
+        body
+        {
+            background-image: url("{% static 'Images/ai.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="main_navbar">
+    <a class="navbar-brand" href="/"><img class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Data Collection <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Model">Model <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="EDA">Exploratory Data Analysis <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Post_Processing">Post Processing
+                    <span class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                    <li><a class="dropdown-item" href="Explanation">Explanation </a></li>
+
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="Experiments">Experiments <span
+                        class="sr-only">(current)</span></a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Regression">ML Regression Experiments</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item" href="ML-Classification">ML Classification Experiments</a></li>
+                </ul>
+            </li>
+        </ul>
+        </li>
+    </div>
+</nav>
+
+  <div id="msgDiv"  style="background-color: #D3D3D3; border-radius: 20px;margin-bottom: 10px; margin-top: 15px;" st class="container box">
+ <center><h3 id="msg"></h3></center>
+ </div>
+
+<div class="container shadow-lg p-5 mb-5 bg-white rounded" style="margin-top: 1.5em; width: 80%;">
+    <form method="post" action="loadEDA" id="eda-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Input Features: </label>
+                    <input type="text" name="inputFeatures" id="input" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label>output features:</label>
+                    <input type="text" name="outputFeatures" id="output" class="form-control" required readonly>
+                </div>
+                <div class="form-group">
+                    <label>Save:</label>
+                    <select name="save" id="save">
+                        <option value=true>Yes</option>
+                        <option value=false>No</option>
+                    </select>
+<!--                    <input type="text" name="show" class="form-control" required>-->
+                </div>
+                <div class="form-group">
+                    <label>Dpi:</label>
+                    <input type="number" id="dpi" name="dpi" type= "text" value="300" class="form-control" required min="10" max="800">
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Path:</label>-->
+<!--                    <input type="text" name="path" class="form-control" required>-->
+<!--                </div>-->
+            </div>
+             <input type="hidden" id="csvFile" name="csvFile">
+            <input type="hidden" id="type" name="type" value="stats">
+            <div class="col">
+                <div class="form-group">
+                    <button type="button" onclick="change('stats')" name="type" value="stats" class="form-control btn btn-primary">Stats</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="change('prob')" value="prob" class="form-control btn btn-primary">Prob plots</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="change('missing')" name="type" value="missing" class="form-control btn btn-primary">Plot Missing</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('index')" name="type" value="index" class="form-control btn btn-primary">Plot Index</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('histogram')" name="type" value="histogram" class="form-control btn btn-primary">Plot Histogram</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('ecdf')" name="type" value="ecdf" class="form-control btn btn-primary">Plot ecdf</button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" onclick="change('data')" name="type" value="data" class="form-control btn btn-primary">Plot data</button>
+                </div>
+            </div>
+            <div class="col">
+
+
+
+                <div class="form-group">
+                    <button type="button" onclick="change('lag')" name="type" value="lag" class="form-control btn btn-primary">Lag plot</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('partial a cor')" name="type" value="partial a cor" class="form-control btn btn-primary">Prtial A-cor</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('heat map')" name="type" value="heat map" class="form-control btn btn-primary">Heat map</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('grouped scatter')" name="type" value="grouped scatter" class="form-control btn btn-primary">Grouped Scatter</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('corelation')" name="type" value="corelation"  class="form-control btn btn-primary">Co-relation</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('auto corelation')" name="type" value="auto corelation" class="form-control btn btn-primary">Auto-Corelation</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="change('box')" name="type" value="box" class="form-control btn btn-primary">Box plot</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+        <div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">EDA Stats</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="modal-body">
+          <table id="table" class="table table-striped table-responsive">
+              <div id="showData"></div>
+  </table>
+  </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+        document.getElementById("input").value = localStorage.getItem("selectedInp");
+        document.getElementById("output").value = localStorage.getItem("selectedOp");
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="{%static 'js/bootnavbar.js' %}"></script>
+<script>
+        $(function () {
+            $('#main_navbar').bootnavbar();
+        })
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-80520768-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-80520768-2');
+</script>
+
+<script type="text/javascript">
+document.getElementById("csvFile").value = localStorage.getItem("inputFile");
+
+
+function change(value){
+console.log("Value", value)
+          document.getElementById("type").value = value;
+          if(validateForm())
+          {
+          console.log("DPI VALUE", $("#dpi").val())
+
+          if($("#dpi").val() >= 10 && $("#dpi").val() <=800)
+          {
+                    $("#eda-form").submit();
+          }
+          else{
+          alert("Enter DPI value between 10 and 800");
+          }
+
+          }
+          else{
+          alert("All fields are required");
+          }
+
+          }
+
+$('#eda-form').on('submit', function(event){
+    event.preventDefault();
+    console.log("form submitted!")  // sanity check
+    create_post();
+});
+
+// AJAX for posting
+function create_post() {
+    console.log("create post is working!") // sanity check
+
+    var form = $(this);
+var formData = $("#eda-form").serialize();
+
+
+    $.ajax({
+        url : "loadEDA", // the endpoint
+        type : "POST", // http method
+        data : formData,
+
+        // handle a successful response
+        success : function(json) {
+        console.log("Success")
+            $('#post-text').val(''); // remove the value from the input
+            console.log(json); // log the returned json to the console
+            console.log("success"); // another sanity check
+           $('#msg').text(json.msg)
+           $('#msgDiv').show()
+
+           if(json.showData)
+           {
+           $('#myModal').modal('show');
+           CreateTableFromJSON(JSON.parse(json.dataToShow))
+           }
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log("Error", err,errmsg)
+<!--            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console-->
+        }
+    });
+};
+
+
+CreateTableFromJSON(dataToShow)
+CreateTableFromJSON(dataToShow)
+function CreateTableFromJSON(jData) {
+var tableTag = document.getElementById('table')
+  var arrJSON = typeof jData != 'object' ? JSON.parse(jData) : jData;
+  var table = ""
+  var th = ''
+
+var parentKeys= Object.keys(arrJSON)
+var childKeys = Object.keys(arrJSON[parentKeys[0]])
+th = th + "<tr><th>Feature</th>"
+  for (var index in childKeys) {
+th = th + `<th>${childKeys[index]}</th>`
+  }
+
+  th = th + "<tr>"
+console.log(parentKeys)
+
+table = table.concat(th);
+var tData = ""
+console.log(arrJSON)
+for(var parentIndex in parentKeys)
+{
+
+console.log(parentKeys[parentIndex])
+
+if(Object.keys((arrJSON[parentKeys[parentIndex]])).length > 0)
+{
+tData = tData + "<tr>"
+tData = tData + "<td>"+parentKeys[parentIndex]+"</td>"
+var childKeys = Object.keys(arrJSON[parentKeys[parentIndex]])
+for(var childIndex in childKeys)
+{
+var data = arrJSON[parentKeys[parentIndex]]
+console.log(data[childKeys[childIndex]])
+tData = tData + "<td>"+data[childKeys[childIndex]]+"</td>"
+}
+tData = tData + "</tr>"
+}
+
+}
+
+<!--tData = tData + "</tr>"-->
+
+table = table.concat(tData);
+console.log(table)
+tableTag.innerHTML = table;
+
+console.log(tableTag.innerHTML)
+
+
+}
+
+
+function ConvertToTable(jData) {
+  var arrJSON = typeof jData != 'object' ? JSON.parse(jData) : jData;
+  var $table = $('<table/>');
+  var $headerTr = $('<tr/>');
+
+  for (var index in arrJSON[0]) {
+    $headerTr.append($('<th/>').html(index));
+  }
+  $table.append($headerTr);
+  for (var i = 0; i < arrJSON.length; i++) {
+   var $tableTr = $('<tr/>');
+    for (var index in arrJSON[i]) {
+      $tableTr.append($('<td/>').html(arrJSON[i][index]));
+    }
+    $table.append($tableTr);
+  }
+  $('#table').append($table);
+}
+
+
+
+function validateForm() {
+    var valid = true;
+    $('input').each(function () {
+        if ($(this).val() === '') {
+            valid = false;
+            return false;
+        }
+    });
+    return valid
+}
+</script>
+</body>
+
+</html>
