@@ -1,5 +1,5 @@
 # Ai4water-
-For running this framework, at this stage you need to install pycharm and other requirements given in requirements.txt file
+For running this framework, at this stage you need to install pycharm and other requirements given in requirements_all.txt file
 You can simple install django on pycharm terminal by using "pip install django"
 Then you can run framework by command "python manage.py runserver --noreload --nothreading", it will run the framework on your local server.
 Working of framework:
