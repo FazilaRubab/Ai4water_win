@@ -18,7 +18,7 @@ def explain_model(
     Explains the ai4water's Model class.
 
     Arguments:
-        model : the AI4Water's model to explain
+        model : the ai4waterlatest's model to explain
         features_to_explain : the input features to explain. It must be a string
             or a list of strings where a string is a  feature name.
         examples_to_explain : the examples to explain. If integer, it will be
@@ -76,7 +76,7 @@ def explain_model_with_lime(
     """Explains the model with LimeExplainer
 
     Arguments:
-        model : the AI4Water's model to explain
+        model : the ai4waterlatest's model to explain
         examples_to_explain : the examples to explain
     Returns:
         an instance of LimeExplainer
@@ -139,7 +139,7 @@ def explain_model_with_shap(
         explainer=None,
         layer:Union[str, int] = None,
 )->"ShapExplainer":
-    """Expalins the model which is built by AI4Water's Model class using SHAP.
+    """Expalins the model which is built by ai4waterlatest's Model class using SHAP.
 
     Arguments:
         model : the model to explain
