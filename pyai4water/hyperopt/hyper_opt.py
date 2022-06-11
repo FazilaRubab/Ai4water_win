@@ -138,7 +138,7 @@ class HyperOpt(object):
     - skopt_space :
     - space dict:
     - title str: name of the folder in which all results will be saved. By
-        default this is same as name of `algorithm`. For `AI4Water` based
+        default this is same as name of `algorithm`. For `ai4waterlatest` based
             models, this is more detailed, containing problem type etc.
 
 
@@ -239,7 +239,7 @@ class HyperOpt(object):
 
     # Backward compatability
     The following shows some tweaks with hyperopt to make its working compatible with its underlying libraries.
-    # using grid search with AI4Water
+    # using grid search with ai4waterlatest
     ```python
     >>>opt = HyperOpt("grid",
     ...           param_space={'n_estimators': [1000, 1200, 1400, 1600, 1800,  2000],
@@ -252,7 +252,7 @@ class HyperOpt(object):
     >>>opt.fit()
     ```
 
-    # using random search with AI4Water
+    # using random search with ai4waterlatest
     ```python
     >>>opt = HyperOpt("random",
     ...           param_space={'n_estimators': [1000, 1200, 1400, 1600, 1800,  2000],
@@ -266,7 +266,7 @@ class HyperOpt(object):
     >>>sr = opt.fit()
     ```
 
-    # using Bayesian with AI4Water
+    # using Bayesian with ai4waterlatest
     ```python
     >>>from ai4water.hyperopt import Integer
     >>>opt = HyperOpt("bayes",
@@ -375,8 +375,8 @@ class HyperOpt(object):
             verbosity : determines amount of information being printed
             kwargs dict:
                 Any additional keyword arguments will for the underlying optimization
-                algorithm. In case of using AI4Water model, these must be arguments
-                which are passed to AI4Water's Model class.
+                algorithm. In case of using ai4waterlatest model, these must be arguments
+                which are passed to ai4waterlatest's Model class.
         """
         if algorithm not in ALGORITHMS:
             raise ValueError(f"""Invalid value of algorithm provided. Allowd values for algorithm"
@@ -867,7 +867,7 @@ Backend must be one of hyperopt, optuna or sklearn but is is {x}"""
                       **self.ai4water_args)
 
         assert model.config["model"] is not None, "Currently supported only for ml models. Make your own" \
-                                                               " AI4Water model and pass it as custom model."
+                                                               " ai4waterlatest model and pass it as custom model."
         model.fit()
 
         t, p = model.predict(process_results=pp, return_true=True)
@@ -913,7 +913,7 @@ Backend must be one of hyperopt, optuna or sklearn but is is {x}"""
     def model_for_gpmin(self):
         """This function can be called in two cases:
             - The user has made its own objective_fn.
-            - We make objective_fn using AI4Water and return the error.
+            - We make objective_fn using ai4waterlatest and return the error.
           In first case, we just return what user has provided.
           """
         if callable(self.objective_fn) and not self.use_named_args:
