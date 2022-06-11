@@ -50,7 +50,7 @@ except ModuleNotFoundError:
 
 class BaseModel(NN, Plots):
 
-    """ Model class that implements logic of AI4Water. """
+    """ Model class that implements logic of ai4waterlatest. """
 
     def __init__(self,
                  model: Union[dict, str] = None,
