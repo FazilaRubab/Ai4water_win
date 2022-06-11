@@ -114,7 +114,7 @@ class DataHandler(AttributeContainer):
                 column is not supposed to be one-hot-encoded rather in the form
                 of [0,1,2,0,1,2,1,2,0] for 3 classes. One-hot-encoding is done
                 inside the model.
-            dataset_args : additional arguments for AI4Water's datasets
+            dataset_args : additional arguments for ai4waterlatest's datasets
             val_fraction : The fraction of the training data to be used for validation.
                 Set to 0.0 if no validation data is to be used.
             test_fraction : Fraction of the complete data to be used for test
