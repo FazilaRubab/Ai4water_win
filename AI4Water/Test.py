@@ -1,5 +1,5 @@
 import site
-site.addsitedir("AI4WaterLatest\\AI4Water")
+site.addsitedir("ai4waterlatest\\ai4waterlatest")
 
 
 import os
