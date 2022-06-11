@@ -459,7 +459,7 @@ class Learner(AttributeContainer):
 
             wandb.init(name=os.path.basename(self.path),
                        project=self.wandb_config.get('probject', 'test_project'),
-                       notes='This is Learner from AI4Water test run',
+                       notes='This is Learner from ai4waterlatest test run',
                        tags=['ai4water', 'pytorch'],
                        entity=self.wandb_config.get('entity', ''))
         return
