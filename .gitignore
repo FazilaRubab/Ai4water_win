@@ -8,3 +8,4 @@ results/
 data/
 __pycache__
 AI4Water/__pycache__/
+*.pyc
