@@ -1,5 +1,5 @@
 import site
-site.addsitedir("E:\\Ai4water latest\\AI4Water")
+site.addsitedir("E:\\Ai4water latest\\ai4waterlatest")
 from django.shortcuts import render, redirect,HttpResponse
 import json
 import pandas as pd
@@ -306,6 +306,7 @@ def renderMLRegression(request):
     return render(request, "ML-Regression.html")
 
 
+
 def renderMLClassification(request):
     return render(request, "ML-Classification.html")
 
@@ -425,7 +426,8 @@ def renderProcessing(request):
         else:
             msg = "Please train a Model first using Fit Button"
             showData = False
-
+    import site
+    site.addsitedir("E:\\Ai4water latest\\ai4waterlatest")
 
     if formData['type'] == 'Optimize Hyper Parameters':
         if aiModal != None:
@@ -461,7 +463,7 @@ def renderProcessing(request):
             x0 = [200, 0.01, 1.0, 1.0, 0.2, 64, "Uniform"]
 
             optimizer = HyperOpt(
-        #        algorithm="bayes"
+                algorithm="bayes",
                 objective_fn=objective_fn(),
                 param_space=space,
                 x0=x0,
