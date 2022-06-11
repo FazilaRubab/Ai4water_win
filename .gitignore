@@ -6,3 +6,4 @@ venv
 # private stuff
 results/
 data/
+__pycache__/
