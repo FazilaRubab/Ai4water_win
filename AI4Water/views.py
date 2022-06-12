@@ -1,5 +1,4 @@
-import site
-site.addsitedir("E:\\Ai4water latest\\ai4waterlatest")
+
 from django.shortcuts import render, redirect,HttpResponse
 import json
 import pandas as pd
