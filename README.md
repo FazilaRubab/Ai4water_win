@@ -22,13 +22,13 @@ You can install requirements_all.txt for installing all dependencies.
 •	Select fit for training 
 
 •	Then you can evaluate the model, cv score, optimize transformations
-
+![Model](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/c4e7fa3e-4a4a-4cf7-9314-29ef50d8613c)
 
 •	You can also make predictions you can make various plots in EDA 
-
+![EDA](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/237c8dd4-5800-49c8-8735-5df38a67b6cc)
 
 •	And also perform post-processing
-
+![Post Processing](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/03258eea-8a21-49d5-acbd-628843ab6d96)
 
 •	Experiment class is not in working condition at this time
 
