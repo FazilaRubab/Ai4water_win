@@ -10,7 +10,7 @@ You can install requirements_all.txt for installing all dependencies.
 •	Then you can run the framework by command "python manage.py runserver --noreload --nothreading", it will run the framework on your local server. You need to write this command on anaconda prompt
 # User Manual: 
 •	Import CSV file
-
+![Import CSV](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/88741b2c-9e14-4c40-a58c-724cb7d78ab6)
 •	upload file 
 
 •	select input & output columns 
@@ -20,6 +20,8 @@ You can install requirements_all.txt for installing all dependencies.
 •	Select model and transformations
 
 •	Select fit for training 
+
+The complete code running video is on the following link: https://drive.google.com/file/d/1qzELgd_mwkjY9W2l8Ne78aSTYzSTj_6O/view?usp=sharing
 
 •	Then you can evaluate the model, cv score, optimize transformations
 ![Model](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/c4e7fa3e-4a4a-4cf7-9314-29ef50d8613c)
