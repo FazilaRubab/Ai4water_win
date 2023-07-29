@@ -21,8 +21,6 @@ You can install requirements_all.txt for installing all dependencies.
 
 •	Select fit for training 
 
-The complete code running video is on the following link: https://drive.google.com/file/d/1qzELgd_mwkjY9W2l8Ne78aSTYzSTj_6O/view?usp=sharing
-
 •	Then you can evaluate the model, cv score, optimize transformations
 ![Model](https://github.com/FazilaRubab/Ai4water_win/assets/51526391/c4e7fa3e-4a4a-4cf7-9314-29ef50d8613c)
 
@@ -34,3 +32,4 @@ The complete code running video is on the following link: https://drive.google.c
 
 •	Experiment class is not in working condition at this time
 
+The complete code running video is on the following link: https://drive.google.com/file/d/1qzELgd_mwkjY9W2l8Ne78aSTYzSTj_6O/view?usp=sharing
